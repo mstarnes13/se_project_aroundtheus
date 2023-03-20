@@ -20,4 +20,4 @@ First project completed using Figma design. Images downloaded from Figma.
   
 Responsive design accessible on desktop, tablet, or mobile device.
 
-mstarnes13.github.io/se_project_aroundtheus
+https://github.com/mstarnes13/se_project_aroundtheus.git
