@@ -2,7 +2,8 @@
   padding-top: 67px;
   padding-bottom: 60px;
   max-width: 880px;
-  margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .footer__copyright {
   font-family: "Inter", sans-serif;

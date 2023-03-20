@@ -45,7 +45,7 @@
   font-family: "Inter", sans-serif;
   font-style: normal;
   margin: 0 0 16px;
-  max-width: 100%;
+  max-width: 373px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -57,6 +57,7 @@
   font-family: "Inter", sans-serif;
   grid-area: description;
   margin: 0;
+  max-width: 415px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
