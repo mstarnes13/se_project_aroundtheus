@@ -71,3 +71,24 @@
   color: #ffffff;
   cursor: pointer;
 }
+@media screen and (max-width: 650px) {
+  .modal__container {
+    width: 282px;
+    max-width: 100%;
+    padding: 25px 22px 25px;
+  }
+  .modal__close {
+    height: 26px;
+    width: 26px;
+    bottom: calc(100% + 14px);
+    left: calc (100% -19px);
+  }
+  .modal__heading {
+    font-size: 14px;
+    margin-bottom: 75px;
+  }
+  .modal__button {
+    font-size: 14px;
+    height: 46px;
+  }
+}
