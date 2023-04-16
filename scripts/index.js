@@ -110,7 +110,7 @@ function getCardElement(cardData) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  const cardImageModal = cardElement.querySelector(".modal__image");
+  // const cardImageModal = cardElement.querySelector("#card-image-modal");
   const cardImageRemove = cardElement.querySelector(".card");
   
   deleteButton.addEventListener("click", () => {
