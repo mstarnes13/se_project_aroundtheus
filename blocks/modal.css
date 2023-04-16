@@ -7,14 +7,20 @@
   background-color: rgba (0, 0, 0, 0.5);
   z-index: 999;
   padding: 0 19px;
-  display: none;
   align-items: center;
   justify-content: center;
   font-family: "inter", sans-serif;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.6s, opacity 0.6s linear;
+  
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.6s linear;
 }
 
 .modal__container {
@@ -40,6 +46,30 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal__container_image {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal__image-name {
+  color: #ffffff;
+  width: 291px;
+  height: 12px;
+  top: 640px;
+  left: 232px;
+  font-size: 12px;
+}
+
 .modal__heading {
   color: black;
   font-weight: 900;
