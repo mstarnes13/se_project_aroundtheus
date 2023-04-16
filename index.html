@@ -103,6 +103,13 @@
           <button class="modal__button">Save</button>
         </form>
       </div>
+      <div class="modal" id="card-image-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="image-close-button"></button>
+          <img src="#" alt="#" class="modal__image"/>
+          <p class="modal__image-name" id="caption-name"></p>
+        </div>
+      </div>
 
     <template id="card-template">
       <li class="card">
@@ -110,6 +117,7 @@
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>
+          <button class="card__delete-button" type="button"></button>
         </div>
       </li>
     </template>
