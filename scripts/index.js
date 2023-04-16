@@ -41,7 +41,7 @@ const addCardEditForm = profileAddModal.querySelector(".modal__form");
 const cardImageModal = document.querySelector("#card-image-modal");
 const captionName = document.querySelector("#caption-name");
 const modalImageElement = document.querySelector(".modal__image");
-const modalImageButton = document.querySelector("#card-image-modal");
+
 
 // buttons and other DOM nodes
 
@@ -88,31 +88,30 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  cardImageEl.src = cardData.link;
+  cardImageEl.alt = cardData.name;
+  cardTitleEl.textContent = cardData.name;
+  
   const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  const cardImageRemove = cardElement.querySelector(".card");
-
   deleteButton.addEventListener("click", () => {
     cardElement.remove(cardImageRemove);
   });
-
-// open card popup
-
   cardImageEl.addEventListener("click", () => {
+    openModal(cardImageModal);
+    const modalCaption = cardImageModal.querySelector("#caption-name");
+    modalCaption.innerText - cardData.name;
+    const modalImageElement = cardImageModal.querySelector(".modal__image");
     modalImageElement.src = cardData.link;
     modalImageElement.alt = cardData.name;
-    captionName.textContent = cardData.name;
-    openModal(cardImageModal);
-    
     
   });
-
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-  cardTitleEl.textContent = cardData.name;
+  
+  
+  // const cardImageRemove = cardElement.querySelector(".card");
   return cardElement;
 }
 
@@ -157,12 +156,12 @@ addCloseButton.addEventListener("click", () =>
 
 profileModalCloseButton.addEventListener("click", closePopup);
 
-modalImageButton.addEventListener("click", () => 
-  closePopup(modalImageButton));
+cardImageModal.addEventListener("click", () => 
+  closePopup(cardImageModal));
 
-cardTemplate.addEventListener("click",() => {
-  cardImageModal.classList.add("modal__opened");
-})
+// cardTemplate.addEventListener("click",() => {
+//   cardImageModal.classList.add("modal__opened");
+// })
 
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
