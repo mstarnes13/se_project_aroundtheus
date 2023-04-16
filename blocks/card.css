@@ -56,9 +56,9 @@
   width: 18px;
   height: 19px;
   top: 23px;
-  right: 16px; 
+  right: 16px;
 }
-.card__delete-button:hover{
+.card__delete-button:hover {
   opacity: 0.5;
   cursor: pointer;
 }
