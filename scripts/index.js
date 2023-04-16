@@ -74,8 +74,10 @@ function closePopup() {
   cardImageModal.classList.remove("modal_opened");
 }
 
-function openModal(modal){
-  modal.classList.add("modal_opened");
+function openModal(){
+  profileEditModal.classList.add("modal_opened");
+  profileAddModal.classList.add("modal_opened");
+  cardImageModal.classList.add("modal_opened");
 }
 
 function deleteCard(card) {
@@ -109,6 +111,7 @@ function getCardElement(cardData) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
+  const cardImageModal = cardElement.querySelector(".modal__image");
   const cardImageRemove = cardElement.querySelector(".card");
   
   deleteButton.addEventListener("click", () => {
@@ -116,6 +119,7 @@ function getCardElement(cardData) {
   });
 
   cardImageEl.addEventListener("click", () => {
+    console.log (cardData.link);
     modalImageElement.src = cardData.link;
     captionName.alt = cardData.name;
     openModal(cardImageModal);
