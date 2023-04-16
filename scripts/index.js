@@ -91,7 +91,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
  profileTitle.textContent = profileTitleInput.value;
  profileDescription.textContent = profileDescriptionInput.value;
- closePopup();
+ closePopup(profileEditModal);
 }
 
 function handleAddCardFormSubmit (e) {
@@ -99,7 +99,7 @@ function handleAddCardFormSubmit (e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({name, link}, cardListEl);
-  closePopup();
+  closePopup(profileAddModal);
 }
 
 
@@ -158,7 +158,8 @@ addCloseButton.addEventListener("click", () =>
   closePopup(profileAddModal)
 );
 
-profileModalCloseButton.addEventListener("click", closePopup);
+profileModalCloseButton.addEventListener("click", () => 
+  closePopup(profileEditModal));
 
 cardImageModal.addEventListener("click", () => 
   closePopup(cardImageModal));
