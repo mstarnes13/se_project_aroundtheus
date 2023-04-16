@@ -30,7 +30,7 @@ const initialCards = [
  ************/
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
-
+  
 // wrappers
 
 const cardListEl = document.querySelector(".cards__list");
@@ -88,18 +88,12 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-  
-  
   const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
-
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  
   const cardImageRemove = cardElement.querySelector(".card");
-  
-  
 
   deleteButton.addEventListener("click", () => {
     cardElement.remove(cardImageRemove);
@@ -112,6 +106,8 @@ function getCardElement(cardData) {
     modalImageElement.alt = cardData.name;
     captionName.textContent = cardData.name;
     openModal(cardImageModal);
+    
+    
   });
 
   cardImageEl.src = cardData.link;
