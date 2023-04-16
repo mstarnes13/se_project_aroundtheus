@@ -68,16 +68,13 @@ const cardUrlInput = addCardEditForm.querySelector(".modal__form-input-url");
  * FUNCTIONS *
  *************/
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
-  profileAddModal.classList.remove("modal_opened");
-  cardImageModal.classList.remove("modal_opened");
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
 }
 
-function openModal(){
-  profileEditModal.classList.add("modal_opened");
-  profileAddModal.classList.add("modal_opened");
-  cardImageModal.classList.add("modal_opened");
+function openModal(modal){
+  modal.classList.add("modal_opened");
+  
 }
 
 function deleteCard(card) {
