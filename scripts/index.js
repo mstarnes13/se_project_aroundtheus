@@ -41,6 +41,8 @@ const addCardEditForm = profileAddModal.querySelector(".modal__form");
 const cardImageModal = document.querySelector("#card-image-modal");
 const captionName = document.querySelector("#caption-name");
 const modalImageElement = document.querySelector(".modal__image");
+const closeButtons = document.querySelectorAll(".modal__close");
+// const modalImagePopup = document.querySelector(".modal__image");
 
 // buttons and other DOM nodes
 
@@ -52,7 +54,6 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const addCloseButton = document.querySelector("#add-close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const saveButton = document.querySelector(".modal__button");
 
 // form data
 
@@ -69,10 +70,8 @@ const cardUrlInput = addCardEditForm.querySelector(".modal__form-input-url");
  * FUNCTIONS *
  *************/
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
-  profileAddModal.classList.remove("modal_opened");
-  cardImageModal.classList.remove("modal_opened");
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
 }
 
 function openModal(modal) {
@@ -109,15 +108,14 @@ function getCardElement(cardData) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  // const cardImageModal = cardElement.querySelector("#card-image-modal");
-  const cardImageRemove = cardElement.querySelector(".card");
 
   deleteButton.addEventListener("click", () => {
-    cardElement.remove(cardImageRemove);
+    // cardElement.remove(cardImageRemove);
   });
 
   cardImageEl.addEventListener("click", () => {
     modalImageElement.src = cardData.link;
+    modalImageElement.alt = cardData.name;
     captionName.textContent = cardData.name;
     openModal(cardImageModal);
   });
@@ -149,16 +147,17 @@ addNewCardButton.addEventListener("click", () => {
   openModal(profileAddModal);
 });
 
-addCloseButton.addEventListener("click", () => closePopup(profileAddModal));
+//addCloseButton.addEventListener("click", () => closePopup(profileAddModal));
 
-profileModalCloseButton.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
+// profileModalCloseButton.addEventListener("click", () =>
+closePopup(profileEditModal);
+// );
 
-cardImageModal.addEventListener("click", () => closePopup(cardImageModal));
+// cardImageModal.addEventListener("click", () => closePopup(cardImageModal));
 
-cardTemplate.addEventListener("click", () => {
-  cardImageModal.classList.add("modal__opened");
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal__close");
+  button.addEventListener("click", () => closePopup(popup));
 });
 
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+initialCards.forEach(renderCard);
