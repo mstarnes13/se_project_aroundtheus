@@ -41,8 +41,8 @@ const addCardEditForm = profileAddModal.querySelector(".modal__form");
 const cardImageModal = document.querySelector("#card-image-modal");
 const captionName = document.querySelector("#caption-name");
 const modalImageElement = document.querySelector(".modal__image");
-const closeButtons = document.querySelectorAll(".modal__close");
-// const modalImagePopup = document.querySelector(".modal__image");
+const closeButton = document.querySelectorAll("#add-close-button");
+const modalImagePopup = document.querySelector(".modal__image");
 
 // buttons and other DOM nodes
 
@@ -100,6 +100,7 @@ function handleAddCardFormSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
+  addCardEditForm.reset();
 }
 
 function getCardElement(cardData) {
@@ -110,7 +111,7 @@ function getCardElement(cardData) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
   deleteButton.addEventListener("click", () => {
-    // cardElement.remove(cardImageRemove);
+    cardElement.remove();
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -147,17 +148,17 @@ addNewCardButton.addEventListener("click", () => {
   openModal(profileAddModal);
 });
 
-//addCloseButton.addEventListener("click", () => closePopup(profileAddModal));
+addCloseButton.addEventListener("click", () => closePopup(profileAddModal));
 
-// profileModalCloseButton.addEventListener("click", () =>
-closePopup(profileEditModal);
-// );
-
-// cardImageModal.addEventListener("click", () => closePopup(cardImageModal));
-
-closeButtons.forEach((button) => {
-  const popup = button.closest(".modal__close");
-  button.addEventListener("click", () => closePopup(popup));
+profileModalCloseButton.addEventListener("click", () => {
+  closePopup(profileEditModal);
 });
+
+cardImageModal.addEventListener("click", () => closePopup(closeButton));
+
+// closeButtons.forEach((button) => {
+//   const popup = button.closest(".modal__close");
+//   button.addEventListener("click", () => closePopup(popup));
+// });
 
 initialCards.forEach(renderCard);
