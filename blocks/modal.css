@@ -4,8 +4,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba (0, 0, 0, 0.5);
   z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 0 19px;
   align-items: center;
   justify-content: center;
@@ -54,10 +54,9 @@
 .modal__container_image {
   width: auto;
   height: auto;
-  border-radius: 0;
-  background: transparent;
   max-width: 75vw;
   max-height: 75vh;
+  background: none;
 }
 
 .modal__image-name {

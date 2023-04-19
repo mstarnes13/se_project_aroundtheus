@@ -41,9 +41,8 @@ const addCardEditForm = profileAddModal.querySelector(".modal__form");
 const cardImageModal = document.querySelector("#card-image-modal");
 const captionName = document.querySelector("#caption-name");
 const modalImageElement = document.querySelector(".modal__image");
-const closeButton = document.querySelectorAll("#add-close-button");
-const modalImagePopup = document.querySelector(".modal__image");
-
+const imageCloseButton = document.querySelector("#image-close-button");
+const closeButtons = document.querySelectorAll(".modal__close");
 // buttons and other DOM nodes
 
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -154,11 +153,9 @@ profileModalCloseButton.addEventListener("click", () => {
   closePopup(profileEditModal);
 });
 
-cardImageModal.addEventListener("click", () => closePopup(closeButton));
-
-// closeButtons.forEach((button) => {
-//   const popup = button.closest(".modal__close");
-//   button.addEventListener("click", () => closePopup(popup));
-// });
+imageCloseButton.addEventListener("click", () => {
+  console.log(imageCloseButton);
+  closePopup(cardImageModal);
+});
 
 initialCards.forEach(renderCard);
