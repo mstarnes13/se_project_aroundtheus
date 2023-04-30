@@ -47,6 +47,7 @@ function setEventListeners(formEl, options) {
       toggleButtonState(inputEls, submitButton, options);
     });
   });
+  toggleButtonState(inputEls, submitButton, options);
 }
 
 function enableValidation(options) {
@@ -57,7 +58,6 @@ function enableValidation(options) {
     });
 
     setEventListeners(formEl, options);
-    
   });
 }
 const config = {
