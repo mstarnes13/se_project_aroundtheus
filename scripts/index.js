@@ -61,9 +61,9 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const cardTitleInput = addCardEditForm.querySelector(
-  ".modal__form-input-title"
+  "#add-card-title-input"
 );
-const cardUrlInput = addCardEditForm.querySelector(".modal__form-input-url");
+const cardUrlInput = addCardEditForm.querySelector("#image-url");
 
 /*************
  * FUNCTIONS *
@@ -102,18 +102,10 @@ function handleAddCardFormSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
-  e.target.reset();
-  const inputEls = [...addCardEditForm.querySelectorAll(config.inputSelector)];
-  const submitButton = addCardEditForm.querySelector(
-    config.submitButtonSelector
-  );
-
-  submitButton.classList.add(config.inactiveButtonClass);
-  submitButton.disabled = true;
-
-  toggleButtonState(inputEls, submitButton, config);
-  e.target.reset();
+ addCardEditForm.reset();
 }
+
+  
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
