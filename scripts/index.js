@@ -69,13 +69,13 @@ const cardUrlInput = addCardEditForm.querySelector("#image-url");
 // close modal function
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escKeyCloseModal);
+  document.removeEventListener("keydown", handleEscKeyCloseModal);
 }
 
 // open modal function
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escKeyCloseModal);
+  document.addEventListener("keydown", handleEscKeyCloseModal);
 }
 
 function deleteCard(card) {
@@ -132,7 +132,7 @@ function getCardElement(cardData) {
   return cardElement;
 }
 // close modals outside of modal function
-const clickOffPopup = (modalElement) => {
+const addClickOffPopup = (modalElement) => {
   modalElement.addEventListener("mousedown", function (evt) {
     if (evt.target === evt.currentTarget) {
       closePopup(modalElement);
@@ -141,16 +141,16 @@ const clickOffPopup = (modalElement) => {
 };
 
 // close modal by clicking outside of edit profile modal
-clickOffPopup(profileEditModal);
+addClickOffPopup(profileEditModal);
 
 // close modal by clicking outside of image modal
-clickOffPopup(cardImageModal);
+addClickOffPopup(cardImageModal);
 
 // close modal by clicking outside of modal
-clickOffPopup(profileAddModal);
+addClickOffPopup(profileAddModal);
 
 // close modals with Esc key
-const escKeyCloseModal = (evt) => {
+const handleEscKeyCloseModal = (evt) => {
   if (evt.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     closePopup(openedModal);
@@ -163,11 +163,13 @@ const escKeyCloseModal = (evt) => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
 
-profileEditButton.addEventListener("click", () => {
+function openEditProfileModal() {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openModal(profileEditModal);
-});
+}
+
+profileEditButton.addEventListener("click", openEditProfileModal);
 
 addNewCardButton.addEventListener("click", () => {
   openModal(profileAddModal);
@@ -180,7 +182,6 @@ profileModalCloseButton.addEventListener("click", () => {
 });
 
 imageCloseButton.addEventListener("click", () => {
-  console.log(imageCloseButton);
   closePopup(cardImageModal);
 });
 
