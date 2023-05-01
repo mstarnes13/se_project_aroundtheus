@@ -60,9 +60,7 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-const cardTitleInput = addCardEditForm.querySelector(
-  "#add-card-title-input"
-);
+const cardTitleInput = addCardEditForm.querySelector("#add-card-title-input");
 const cardUrlInput = addCardEditForm.querySelector("#image-url");
 
 /*************
@@ -102,10 +100,8 @@ function handleAddCardFormSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
- addCardEditForm.reset();
+  addCardEditForm.reset();
 }
-
-  
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
