@@ -101,6 +101,8 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
   addCardEditForm.reset();
+  
+  toggleButtonState(inputEls, submitButton, options);
 }
 
 function getCardElement(cardData) {
