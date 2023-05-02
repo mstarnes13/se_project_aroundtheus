@@ -101,8 +101,11 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
   addCardEditForm.reset();
-  
-  toggleButtonState(inputEls, submitButton, options);
+  const inputEls = [...addCardEditForm.querySelectorAll(config.inputSelector)];
+  const submitButton = addCardEditForm.querySelector(
+    config.submitButtonSelector
+  );
+  toggleButtonState(inputEls, submitButton, config);
 }
 
 function getCardElement(cardData) {
