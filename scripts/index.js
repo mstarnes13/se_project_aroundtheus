@@ -137,7 +137,7 @@ function getCardElement(cardData) {
   return cardElement;
 }
 // close modals outside of modal function
-const addClickOffPopup = (modalElement) => {
+const addClickOffPopupListener = (modalElement) => {
   modalElement.addEventListener("mousedown", function (evt) {
     if (evt.target === evt.currentTarget) {
       closePopup(modalElement);
@@ -146,13 +146,13 @@ const addClickOffPopup = (modalElement) => {
 };
 
 // close modal by clicking outside of edit profile modal
-addClickOffPopup(profileEditModal);
+addClickOffPopupListener(profileEditModal);
 
 // close modal by clicking outside of image modal
-addClickOffPopup(cardImageModal);
+addClickOffPopupListener(cardImageModal);
 
 // close modal by clicking outside of modal
-addClickOffPopup(profileAddModal);
+addClickOffPopupListener(profileAddModal);
 
 // close modals with Esc key
 const handleEscKeyCloseModal = (evt) => {
