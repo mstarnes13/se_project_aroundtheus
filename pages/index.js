@@ -43,7 +43,7 @@ const cardImageModal = document.querySelector("#card-image-modal");
 const captionName = document.querySelector("#caption-name");
 const modalImageElement = document.querySelector(".modal__image");
 const imageCloseButton = document.querySelector("#image-close-button");
-// const closeButtons = document.querySelectorAll(".modal__close");
+
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileModalCloseButton = document.querySelector(
   "#profile-modal-close-button"
@@ -76,10 +76,6 @@ addClickOffPopupListener(cardImageModal);
 
 addClickOffPopupListener(profileAddModal);
 
-// function deleteCard(card) {
-//   card.classList.remove("card");
-// }
-
 function renderCard(cardData, cardListEl) {
   const card = new Card(cardData, "#card-template");
   cardListEl.prepend(card.getView());
@@ -103,43 +99,7 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(profileAddModal);
   addCardEditForm.reset();
-
-  // const inputEls = [...addCardEditForm.querySelectorAll(config.inputSelector)];
-  // const submitButton = addCardEditForm.querySelector(
-  //   config.submitButtonSelector
-  // );
-  // toggleButtonState(inputEls, submitButton, config);
 }
-
-// function getCardElement(cardData) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const cardImageEl = cardElement.querySelector(".card__image");
-//   const cardTitleEl = cardElement.querySelector(".card__title");
-//   const likeButton = cardElement.querySelector(".card__like-button");
-//   const deleteButton = cardElement.querySelector(".card__delete-button");
-
-//   deleteButton.addEventListener("click", () => {
-//     cardElement.remove();
-//   });
-
-//   cardImageEl.addEventListener("click", () => {
-//     modalImageElement.src = cardData.link;
-//     modalImageElement.alt = cardData.name;
-//     captionName.textContent = cardData.name;
-//     openModal(cardImageModal);
-//   });
-
-//   likeButton.addEventListener("click", () => {
-//     likeButton.classList.toggle("card__like-button_active");
-//   });
-
-//   cardImageEl.src = cardData.link;
-//   cardImageEl.alt = cardData.name;
-//   cardTitleEl.textContent = cardData.name;
-
-//   return cardElement;
-// }
-// close modals outside of modal function
 
 /*******************
  * EVENT LISTENERS *
