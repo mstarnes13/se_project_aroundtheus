@@ -38,7 +38,7 @@ export const cardImageModal = document.querySelector("#card-image-modal");
 export const captionName = document.querySelector("#caption-name");
 export const cardList = document.querySelector(".cards__list");
 export const modalImageElement = document.querySelector(".modal__image");
-export const profileTitle = document.querySelector(userNameSelector);
+export const profileTitle = document.querySelector(".profile__title");
 export const profileDescription = document.querySelector(
   ".profile__description"
 );
@@ -85,4 +85,4 @@ const validationSettings = {
   errorClass: "modal__error_visible",
 };
 
-export { initialCards };
+
