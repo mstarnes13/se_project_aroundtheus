@@ -4,7 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-
+import "../pages/index.css";
 import {
   profileEditForm,
   addCardEditButton,
@@ -73,7 +73,7 @@ const modalFormImage = new PopupWithForm({
 const cardSection = new Section(
   {
     data: initialCards,
-    render: renderCard,
+    renderer: renderCard,
   },
   cardListSelector
 );
@@ -91,7 +91,7 @@ modalWithImage.setEventListeners();
 modalWithFormUser.setEventListeners();
 
 profileEditButton.addEventListener("click", () => {
-  modalFormUser.open();
+  modalWithFormUser.open();
   const userData = userInfo.getUserInfo();
   modalNameInput.value = userData.userName;
   modalDescriptionInput.value = userData.userDescription;
@@ -102,7 +102,12 @@ addNewCardButton.addEventListener("click", () => {
   modalFormImage.open();
 });
 
-function createCare(cardData) {
+function renderCard(cardData) {
+  const cardImage = createCard(cardData);
+  cardSection.addItem(cardImage);
+}
+
+function createCard(cardData) {
   const card = new Card(
     {
       name: cardData.name,
@@ -111,7 +116,6 @@ function createCare(cardData) {
     "#card-template",
     handleCardClick
   );
-
   const cardElement = card.getView();
   return cardElement;
 }
