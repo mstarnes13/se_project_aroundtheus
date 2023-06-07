@@ -7,7 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import {
   profileEditForm,
-  addCardEditButton,
+  addCardEditForm,
   initialCards,
   cardList,
   validationSettings,
@@ -28,7 +28,7 @@ import {
  **************/
 const addFormValidator = new FormValidator(
   validationSettings,
-  addCardEditButton
+  addCardEditForm
 );
 addFormValidator.enableValidation();
 

@@ -77,7 +77,7 @@ export const modalDescriptionInput = document.querySelector(
   modalDescriptonInputSelector
 );
 
-const validationSettings = {
+export const validationSettings = {
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",

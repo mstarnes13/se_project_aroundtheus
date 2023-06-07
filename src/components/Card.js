@@ -1,11 +1,3 @@
-// import {
-//   modalImageElement,
-//   captionName,
-//   cardImageModal,
-// } from "../pages/index.js";
-
-// import { openModal } from "../utils/utils.js";
-
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._data = data;
@@ -33,7 +25,7 @@ export default class Card {
     });
   }
 
-  _handleLikeButton() {
+  _handleLikeIcon() {
     this._element
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
@@ -61,6 +53,6 @@ export default class Card {
 
     this._setEventListeners();
 
-    return this._cardElement;
+    return this._element;
   }
 }
