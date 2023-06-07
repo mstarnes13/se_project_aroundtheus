@@ -4,30 +4,36 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import Popup from "../components/Popup.js";
+
 import {
+  profileEditForm,
+  addCardEditButton,
   initialCards,
+  cardList,
   validationSettings,
   userNameSelector,
   userDescriptionSelector,
   imageModalSelector,
   profileModalSelector,
   cardModalSelector,
+  cardListSelector,
+  profileEditButton,
   modalNameInput,
   modalDescriptionInput,
- } from "../utils/constants.js";
+  addNewCardButton,
+} from "../utils/constants.js";
 
 /**************
  * VALIDATION *
  **************/
 const addFormValidator = new FormValidator(
-  formValidationConfig,
-  addCardEditForm
+  validationSettings,
+  addCardEditButton
 );
 addFormValidator.enableValidation();
 
 const editFormValidator = new FormValidator(
-  formValidationConfig,
+  validationSettings,
   profileEditForm
 );
 
@@ -95,3 +101,23 @@ addNewCardButton.addEventListener("click", () => {
   addFormValidator.resetValidation();
   modalFormImage.open();
 });
+
+function createCare(cardData) {
+  const card = new Card(
+    {
+      name: cardData.name,
+      link: cardData.link,
+    },
+    "#card-template",
+    handleCardClick
+  );
+
+  const cardElement = card.getView();
+  return cardElement;
+}
+
+function handleCardClick(cardData) {
+  if (cardData && cardData.link && cardData.name) {
+    modalWithImage.open({ link: cardData.link, name: cardData.name });
+  }
+}
