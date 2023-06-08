@@ -1,5 +1,5 @@
 import Popup from "./Popup.js";
-import "../pages/index.js";
+
 
 export default class PopupWithImage extends Popup {
   constructor({ popupSelector }) {
