@@ -86,10 +86,6 @@ addFormValidator.enableValidation();
  * EVENT LISTENERS *
  *******************/
 
-modalFormImage.setEventListeners();
-modalWithImage.setEventListeners();
-modalWithFormUser.setEventListeners();
-
 profileEditButton.addEventListener("click", () => {
   modalWithFormUser.open();
   const userData = userInfo.getUserInfo();
