@@ -46,7 +46,7 @@ export const profileTitleInput = document.querySelector("#profile-title-input");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-
+export const cardModalDelete = "#card-modal-delete";
 /***********
  * BUTTONS *
  ***********/
@@ -59,7 +59,8 @@ export const addNewCardButton = document.querySelector(".profile__add-button");
 export const addCloseButton = document.querySelector("#add-close-button");
 export const cardDeleteButton = document.querySelector(".card__button-delete");
 export const modalSaveButton = document.querySelector(".modal__button");
-
+export const cardDeleteModal = document.querySelector("#card-modal-delete");
+export const modalCloseButton = document.querySelector("#card-modal-delete-close");
 /*************
  * SELECTORS *
  *************/
@@ -76,13 +77,30 @@ export const modalNameInput = document.querySelector(modalNameInputSelector);
 export const modalDescriptionInput = document.querySelector(
   modalDescriptonInputSelector
 );
+export const modalChangeProfileAvatarSelector = "#change-avatar-modal";
+export const editModalFormSelector = "#edit-modal-form";
+export const addCardFormSelector = "#add-card-modal-form";
+export const avatarModalFormSelector = "#modal-form-avatar";
+export const avatarEditButton = document.querySelector(".profile__image-edit-button");
+export const avatarSelector = ".profile__image";
+export const changeProfileModal = document.querySelector(modalChangeProfileAvatarSelector);
+
+/*************
+ * FORM DATA *
+ *************/
+export const nameInput = profileEditForm.querySelector(".modal__form-input_type_name");
+export const descriptionInput = profileEditForm.querySelector(".modal__form-input_type_description");
+export const cardTitleInput = addCardEditForm.querySelector(".modal__form-input_type_title");
+export const cardUrlInput = addCardEditForm.querySelector(".modal__form-input_type_url");
 
 export const validationSettings = {
+  formSelector: ".modal__form",
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
 
 
