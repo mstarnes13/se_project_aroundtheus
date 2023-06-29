@@ -40,11 +40,11 @@ export default class Api {
     });
   }
 
-/************
- * ADD CARD *
- ************/
+  /************
+   * ADD CARD *
+   ************/
 
-  addCard({ title, url }) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -52,18 +52,26 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: title,
-        link: url,
+        name,
+        link,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+        console.error(err);
+      });
     });
   }
 
-/********************
- * UPDATE USER INFO *
- ********************/
+  /********************
+   * UPDATE USER INFO *
+   ********************/
   updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      method: "PATCH",
       headers: {
         authorization: this._authToken,
         "Content-Type": "application/json",
@@ -72,6 +80,14 @@ export default class Api {
         name,
         about,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+        console.error(err);
+      });
     });
   }
 
@@ -95,8 +111,7 @@ export default class Api {
     });
   }
 
-  
-  removeCard(cardID) {
+  deleteCard(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: "DELETE",
       headers: {

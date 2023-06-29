@@ -31,6 +31,7 @@ import {
   cardModalDelete,
 } from "../utils/constants.js";
 
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "9c860865-e6d3-4014-b437-60037dde85fb",
@@ -47,14 +48,6 @@ const userInfo = new UserInfo({
 
 let userId;
 
-const cardSection = new Section(
-  {
-    data: [],
-    render: renderCard,
-  },
-  cardListSelector
-);
-
 function renderCard(cardData) {
   const cardImage = createCard(cardData);
   cardSection.prependItem(cardImage);
@@ -62,16 +55,20 @@ function renderCard(cardData) {
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
-    userId = userData._id;
+    
     userInfo.setUserInfo({
       userName: userData.name,
       userDescription: userData.about,
+      avatar: userData.avatar,
     });
     userInfo.setAvatarInfo(userData.avatar);
-    cardData.forEach((card) => {
-      renderCard(card);
-    });
-
+    userId = userData._id; 
+    cardSection = new Section( {
+      items: cardData,
+      renderer: renderCard,
+    },
+    selectors.cardSection
+  );
     cardSection.renderItems();
   })
   .catch((err) => {
@@ -163,11 +160,11 @@ const deleteModal = new PopupWithForm({
   loadingText: "Deleting...",
 });
 
-modalFormImage.setEventListeners();
-modalWithImage.setEventListeners();
-modalFormUser.setEventListeners();
-modalWithFormUser.setEventListeners();
-deleteModal.setEventListeners();
+// modalFormImage.setEventListeners();
+// modalWithImage.setEventListeners();
+// modalFormUser.setEventListeners();
+// modalWithFormUser.setEventListeners();
+// deleteModal.setEventListeners();
 
 /**************
  * VALIDATION *
@@ -246,11 +243,11 @@ function createCard(cardData) {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
           deleteModal.renderLoading(true);
-          const id = card.getId();
+          const id = element.getId();
           api
-            .removeCard(id)
+            .deleteCard(id)
             .then(() => {
-              card._handleDeleteIcon();
+              element._handleDeleteIcon();
               deleteModal.close();
             })
             .catch(console.error)
