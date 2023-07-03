@@ -20,7 +20,12 @@
       <main class="content">
         <section class="profile page__section">
           <div class="profile__image-edit">
-            <img src="" alt="Avatar" class="profile__image" />
+            <img
+            src="<%= require('./images/jacques-cousteau.jpg')%>"
+            alt="Avatar"
+            class="profile__image"
+          />
+            
             <button class="profile__image-edit-button" type="button"></button>
           </div>
           <div class="profile__info">
@@ -89,37 +94,36 @@
     <div class="modal" id="change-avatar-modal">
       <div class="modal__container">
         <button
-          class="modal__close-button"
+          class="modal__close"
           id="modal-avatar-close-button"
           type="button"
-        >
-          <h3 class="modal__heading" id="profile-avatar-heading">
-            Change profile picture
-          </h3>
-          <form class="modal__form" action="#" id="modal-form-avatar">
-            <input
-              class="modal__form-input"
-              id="modal-avatar-url-input"
-              type="url"
-              name="url"
-              value=""
-              placeholder="Image URL"
-              required
-            />
-            <span
-              class="modal__error-message"
-              id="modal-avatar-url-input-error"
-            ></span>
-            <button
-              class="modal__save-button modal__button disabled"
-              id="change-profile-avatar-submit-button"
-              type="submit"
-              disabled
-            >
-              Save
-            </button>
-          </form>
-        </button>
+        ></button>
+        <h3 class="modal__heading" id="profile-avatar-heading">
+          Change profile picture
+        </h3>
+        <form class="modal__form" action="#" id="modal-form-avatar">
+          <input
+            class="modal__form-input"
+            id="modal-avatar-url-input"
+            type="url"
+            name="url"
+            value=""
+            placeholder="Image URL"
+            required
+          />
+          <span
+            class="modal__error-message"
+            id="modal-avatar-url-input-error"
+          ></span>
+          <button
+            class="modal__save-button modal__button disabled"
+            id="change-profile-avatar-submit-button"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
       </div>
     </div>
 
@@ -133,7 +137,7 @@
           <input
             class="modal__form-input modal__form-input_type_title"
             type="text"
-            name="title"
+            name="name"
             id="add-card-title-input"
             placeholder="Title"
             required
@@ -146,7 +150,7 @@
           <input
             class="modal__form-input modal__form-input_type_url"
             type="url"
-            name="url"
+            name="link"
             id="image-url"
             placeholder="Image URL"
             required
@@ -163,7 +167,7 @@
     <div class="modal" id="card-modal-delete">
       <div class="modal__container">
         <button
-          class="modal__close-button"
+          class="modal__close"
           id="card-modal-delete-close"
         ></button>
         <h3 class="modal__heading">Are you sure?</h3>

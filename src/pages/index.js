@@ -31,7 +31,6 @@ import {
   cardModalDelete,
 } from "../utils/constants.js";
 
-
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "9c860865-e6d3-4014-b437-60037dde85fb",
@@ -46,7 +45,7 @@ const userInfo = new UserInfo({
   avatarSelector,
 });
 
-let userId;
+let userId, cardSection;
 
 function renderCard(cardData) {
   const cardImage = createCard(cardData);
@@ -55,20 +54,20 @@ function renderCard(cardData) {
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
-    
     userInfo.setUserInfo({
       userName: userData.name,
       userDescription: userData.about,
       avatar: userData.avatar,
     });
-    userInfo.setAvatarInfo(userData.avatar);
-    userId = userData._id; 
-    cardSection = new Section( {
-      items: cardData,
-      renderer: renderCard,
-    },
-    selectors.cardSection
-  );
+    // userInfo.setAvatarInfo(userData.avatar);
+    userId = userData._id;
+    cardSection = new Section(
+      {
+        data: cardData,
+        renderer: renderCard,
+      },
+      cardListSelector
+    );
     cardSection.renderItems();
   })
   .catch((err) => {
@@ -104,6 +103,8 @@ const modalWithFormUser = new PopupWithForm({
   loadingText: "Saving...",
 });
 
+console.log('profileModalSelector: ', profileModalSelector)
+
 const modalFormUser = new PopupWithForm({
   modalSelector: profileModalSelector,
   handleFormSubmit: (data) => {
@@ -133,6 +134,8 @@ const modalFormImage = new PopupWithForm({
   modalSelector: cardModalSelector,
   handleFormSubmit: (inputValues) => {
     modalFormImage.renderLoading(true);
+    console.log('inputValues: ', inputValues)
+
     api
       .addCard(inputValues)
       .then((inputValues) => {
@@ -160,11 +163,11 @@ const deleteModal = new PopupWithForm({
   loadingText: "Deleting...",
 });
 
-// modalFormImage.setEventListeners();
-// modalWithImage.setEventListeners();
-// modalFormUser.setEventListeners();
-// modalWithFormUser.setEventListeners();
-// deleteModal.setEventListeners();
+modalFormImage.setEventListeners();
+modalWithImage.setEventListeners();
+modalFormUser.setEventListeners();
+modalWithFormUser.setEventListeners();
+deleteModal.setEventListeners();
 
 /**************
  * VALIDATION *
@@ -205,7 +208,7 @@ enableValidation(validationSettings);
  *******************/
 
 profileEditButton.addEventListener("click", () => {
-  modalWithFormUser.open();
+  modalFormUser.open();
   const userData = userInfo.getUserInfo();
   modalNameInput.value = userData.userName;
   modalDescriptionInput.value = userData.userDescription;
@@ -228,26 +231,25 @@ avatarEditButton.addEventListener("click", () => {
 });
 
 function createCard(cardData) {
-  const likes = cardData.likes || [];
+  // const likes = cardData.likes || [];
+  // console.log('cardData: ', cardData)
   const card = new Card(
     {
-      cardData: {
-        ...cardData,
-        likes: likes,
-      },
+      cardData,
       myId: userId,
-      handleCardClick: (data) => {
-        modalWithImage.open(data);
+      handleCardClick: () => {
+        // console.log("cardClick data: ", cardData);
+        modalWithImage.open(cardData);
       },
       handleDeleteClick: () => {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
           deleteModal.renderLoading(true);
-          const id = element.getId();
+          const id = card.getId();
           api
             .deleteCard(id)
             .then(() => {
-              element._handleDeleteIcon();
+              card._handleDeleteIcon();
               deleteModal.close();
             })
             .catch(console.error)
@@ -257,8 +259,9 @@ function createCard(cardData) {
         });
       },
 
-      handleLikeClick: () => {
+      handleAPILikeClick: () => {
         const id = card.getId();
+        // console.log('card Id: ', id)
         if (card.isLiked()) {
           api
             .unLikeCard(id)

@@ -35,9 +35,9 @@ export default class Popup {
 
   renderLoading(isLoading) {
     if (isLoading) {
-      this.buttonEl.textContent = this._loadingText;
+      this._submitButton.textContent = this._loadingText;
     } else {
-      this._buttonEl.textContent = this._submitButtonText;
+      this._submitButton.textContent = this._submitButtonText;
     }
   }
 }

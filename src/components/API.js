@@ -12,14 +12,21 @@ export default class Api {
       headers: {
         authorization: this._authToken,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`).catch((err) => {
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(`Error: ${res.status}`);
+        }
+      })
+      .then((data) => {
+        // console.log("getInitialCards data: ", data);
+        return data;
+      })
+      .catch((err) => {
         console.error(err);
       });
-    });
   }
 
   /***************
@@ -45,6 +52,7 @@ export default class Api {
    ************/
 
   addCard({ name, link }) {
+    console.log("name/link: ", name, link);
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -57,6 +65,7 @@ export default class Api {
       }),
     }).then((res) => {
       if (res.ok) {
+        // console.log('res.json', res.json())
         return res.json();
       }
 
@@ -112,6 +121,7 @@ export default class Api {
   }
 
   deleteCard(cardID) {
+    console.log("deleteCard");
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: "DELETE",
       headers: {
@@ -142,6 +152,7 @@ export default class Api {
   }
 
   likeCard(cardId) {
+    // console.log('likeCard API')
     return fetch(
       `https://around.nomoreparties.co/v1/group-12/cards/likes/${cardId}`,
       {
