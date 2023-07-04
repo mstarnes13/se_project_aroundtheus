@@ -30,7 +30,7 @@ export default class Card {
   }
 
   updateLikes() {
-    this._likesAmount = this._element.querySelector(".card__like-button");
+    this._likesAmount = this._element.querySelector(".card__like-amount");
     this._likesAmount.textContent = this._likes.length;
   }
 
