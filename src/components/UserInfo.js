@@ -8,16 +8,16 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    console.log("getUserInfo: ", this.userDescriptionSelector);
+    // console.log("getUserInfo: ", this.userDescriptionSelector);
     return {
       userName: this._userNameElement.textContent,
       userDescription: this._userDescriptionElement.textContent,
     };
   }
 
-  setUserInfo({ userName, userDescription, avatar }) {
-    this._userNameElement.textContent = userName;
-    this._userDescriptionElement.textContent = userDescription;
+  setUserInfo({ title, description, avatar }) {
+    this._userNameElement.textContent = title;
+    this._userDescriptionElement.textContent = description;
     this._profileAvatarElement.src = avatar;
   }
 

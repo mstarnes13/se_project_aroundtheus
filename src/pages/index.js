@@ -55,8 +55,8 @@ function renderCard(cardData) {
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     userInfo.setUserInfo({
-      userName: userData.name,
-      userDescription: userData.about,
+      title: userData.name,
+      description: userData.about,
       avatar: userData.avatar,
     });
     // userInfo.setAvatarInfo(userData.avatar);
@@ -134,7 +134,7 @@ const modalFormImage = new PopupWithForm({
   modalSelector: cardModalSelector,
   handleFormSubmit: (inputValues) => {
     modalFormImage.renderLoading(true);
-    console.log('inputValues: ', inputValues)
+    // console.log('inputValues: ', inputValues)
 
     api
       .addCard(inputValues)

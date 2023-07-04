@@ -78,7 +78,7 @@ export default class Api {
   /********************
    * UPDATE USER INFO *
    ********************/
-  updateUserInfo(name, about) {
+  updateUserInfo({ title, description }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -86,8 +86,8 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
-        about,
+        name: title,
+        about: description,
       }),
     }).then((res) => {
       if (res.ok) {
