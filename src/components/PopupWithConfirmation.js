@@ -7,6 +7,10 @@ export default class PopupWithConfirmation extends Popup {
         
     }
 
+    setSubmitAction(action) {
+      this._handleFormSubmit = action;
+    }
+
     renderLoading(isLoading, submitSave) {
         if (isLoading) {
           this._popupForm.querySelector(".modal__save-button").textContent = "Deleting...";
@@ -16,11 +20,14 @@ export default class PopupWithConfirmation extends Popup {
       }
 
       close() {
-        this._popupForm.removeEventListener("submit", this._handleFormSubmit);
         super.close();
+        this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+
       }
+    setEventListeners() {
+      super.setEventListeners();
+      this._popupForm.addEventListener("submit", this._handleFormSubmit);
+    }
     
-      setSubmitAction(action) {
-        this._handleFormSubmit = action;
-      }
+      
 }

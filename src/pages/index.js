@@ -14,7 +14,7 @@ import {
   validationSettings,
   userNameSelector,
   userDescriptionSelector,
-  imageModalSelector,
+  avatarModal,
   profileModalSelector,
   cardModalSelector,
   cardListSelector,
@@ -86,8 +86,9 @@ export const cardTemplate = document
 /********************
  * POPUP WITH IMAGE *
  ********************/
+
 const modalWithImage = new PopupWithImage({
-  modalSelector: imageModalSelector,
+  modalSelector: avatarSelector,
 });
 
 const modalWithFormUser = new PopupWithForm({
@@ -122,7 +123,7 @@ const modalFormUser = new PopupWithForm({
           title: data.name,
           description: data.about,
         });
-        userInfo.setAvatarInfo(data.avatar);
+        // userInfo.setAvatarInfo(data.avatar);
         modalFormUser.close();
       })
       .catch(console.error)
@@ -163,7 +164,7 @@ const modalFormImage = new PopupWithForm({
   loadingText: "Saving...",
 });
 
-const deleteModal = new PopupWithForm({
+const deleteModal = new PopupWithConfirmation({
   handleFormSubmit: () => {
     deleteModal.renderLoading(true);
   },
