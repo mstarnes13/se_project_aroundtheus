@@ -5,7 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
-import Api from "../components/API.js";
+import Api from "../utils/API.js";
 import {
   profileEditForm,
   addCardEditForm,
@@ -30,11 +30,16 @@ import {
   avatarModalFormSelector,
   cardModalDelete,
 } from "../utils/constants.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authToken: "9c860865-e6d3-4014-b437-60037dde85fb",
+  headers: {
+    authorization: "9c860865-e6d3-4014-b437-60037dde85fb",
+    "Content-Type" : "application/json",
+  },
 });
+  
 
 /*************
  * USER INFO *
@@ -96,6 +101,7 @@ const modalWithFormUser = new PopupWithForm({
         modalWithFormUser.close();
       })
       .catch(console.error)
+      
       .finally(() => {
         modalWithFormUser.renderLoading(false);
       });
@@ -103,7 +109,7 @@ const modalWithFormUser = new PopupWithForm({
   loadingText: "Saving...",
 });
 
-console.log('profileModalSelector: ', profileModalSelector)
+// console.log('profileModalSelector: ', profileModalSelector)
 
 const modalFormUser = new PopupWithForm({
   modalSelector: profileModalSelector,
@@ -120,11 +126,12 @@ const modalFormUser = new PopupWithForm({
         modalFormUser.close();
       })
       .catch(console.error)
+      
       .finally(() => {
         modalFormUser.renderLoading(false);
-        if ("edit-modal-form" in formValidators) {
-          formValidators["edit-modal-form"].resetValidation();
-        }
+        // if ("edit-modal-form" in formValidators) {
+        //   formValidators["edit-modal-form"].resetValidation();
+        // }
       });
   },
   loadingText: "Saving...",
@@ -144,14 +151,15 @@ const modalFormImage = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-      })
+  })
       .finally(() => {
         modalFormImage.renderLoading(false);
-        if ("add-card-form" in formValidators) {
-          formValidators["add-card-form"].resetValidation();
-        }
+        // if ("add-card-form" in formValidators) {
+        //   formValidators["add-card-form"].resetValidation();
+        // }
       });
   },
+  
   loadingText: "Saving...",
 });
 
@@ -168,6 +176,9 @@ modalWithImage.setEventListeners();
 modalFormUser.setEventListeners();
 modalWithFormUser.setEventListeners();
 deleteModal.setEventListeners();
+
+
+
 
 /**************
  * VALIDATION *
@@ -230,7 +241,7 @@ avatarEditButton.addEventListener("click", () => {
   }
 });
 
-function createCard(cardData) {
+ function createCard(cardData)  {
   // const likes = cardData.likes || [];
   // console.log('cardData: ', cardData)
   const card = new Card(
@@ -249,7 +260,7 @@ function createCard(cardData) {
           api
             .deleteCard(id)
             .then(() => {
-              card._handleDeleteIcon();
+              card.deleteCard();
               deleteModal.close();
             })
             .catch(console.error)
@@ -257,6 +268,7 @@ function createCard(cardData) {
               deleteModal.renderLoading(false);
             });
         });
+        
       },
 
       handleAPILikeClick: () => {
@@ -278,8 +290,10 @@ function createCard(cardData) {
             .catch((err) => console.error(err));
         }
       },
+      
     },
     "#card-template"
   );
   return card.getView();
-}
+};
+

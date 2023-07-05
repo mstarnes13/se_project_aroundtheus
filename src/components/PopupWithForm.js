@@ -37,6 +37,14 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 
+  // renderLoading(isLoading) {
+  //   if (isLoading) {
+  //     this._submitButton.textContent = this._loadingText;
+  //   } else {
+  //     this._submitButton.textContent = this._submitButtonText;
+  //   }
+  // }
+
   setSubmitAction(action) {
     this._handleFormSubmit = action;
   }

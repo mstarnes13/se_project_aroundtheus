@@ -14,6 +14,7 @@ export default class Card {
     this._likes = cardData.likes;
     this._myId = myId;
     this._ownerId = cardData.owner._id;
+    
   }
 
   getId() {
@@ -26,19 +27,28 @@ export default class Card {
 
   setLikes(likes) {
     this._likes = likes;
-    this.updateLikes();
+    this.renderLikes();
   }
 
-  updateLikes() {
+  renderLikes() {
     this._likesAmount = this._element.querySelector(".card__like-amount");
     this._likesAmount.textContent = this._likes.length;
+    if (this.isLiked()) {
+      this._element
+        .querySelector(".card__like-button")
+        .classList.add("card__like-button_active");
+    } else {
+      this._element
+        .querySelector(".card__like-button")
+        .classList.remove("card__like-button_active");
+    }
   }
 
   _setEventListeners() {
     this._element
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLikeClick();
+        this._handleAPILikeClick();
       });
     this._element
       .querySelector(".card__delete-button")
@@ -52,20 +62,19 @@ export default class Card {
       });
   }
 
-  _handleLikeClick() {
-    if (!this.isLiked()) {
-      this._element
-        .querySelector(".card__like-button")
-        .classList.add("card__like-button_active");
-    } else {
-      this._element
-        .querySelector(".card__like-button")
-        .classList.remove("card__like-button_active");
-    }
-    this._handleAPILikeClick();
-  }
+  // _handleLikeClick() {
+  //   if (!this.isLiked()) {
+  //     this._element
+  //       .querySelector(".card__like-button")
+  //       .classList.add("card__like-button_active");
+  //   } else {
+  //     this._element
+  //       .querySelector(".card__like-button")
+  //       .classList.remove("card__like-button_active");
+  //   }
+  // }
 
-  _handleDeleteIcon() {
+  _deleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -90,9 +99,11 @@ export default class Card {
     this._cardTitle.textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-
+    this.renderLikes();
+    
     this._setEventListeners();
-    this._handleLikeClick();
+    // this._handleAPILikeClick();
+    
 
     return this._element;
   }
