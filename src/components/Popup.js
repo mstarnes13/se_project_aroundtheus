@@ -32,12 +32,13 @@ export default class Popup {
       .querySelector(".modal__close")
       .addEventListener("click", () => this.close());
   }
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._submitButton.textContent = this._loadingText;
-    } else {
-      this._submitButton.textContent = this._submitButtonText;
-    }
-  }
+
+  // renderLoading(isLoading) {
+  //   if (isLoading) {
+  //     this._submitButton.textContent = this._loadingText;
+  //   } else {
+  //     this._submitButton.textContent = this._submitButtonText;
+  //   }
+  // }
   
 }

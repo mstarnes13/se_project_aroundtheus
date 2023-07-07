@@ -64,7 +64,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       description: userData.about,
       avatar: userData.avatar,
     });
-    // userInfo.setAvatarInfo(userData.avatar);
+    userInfo.setAvatarInfo(userData.avatar);
     userId = userData._id;
     cardSection = new Section(
       {
@@ -261,7 +261,7 @@ avatarEditButton.addEventListener("click", () => {
           api
             .deleteCard(id)
             .then(() => {
-              card._deleteCard();
+              card.deleteCard();
               deleteModal.close();
             })
             .catch(console.error)
