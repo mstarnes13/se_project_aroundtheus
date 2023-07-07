@@ -1,9 +1,11 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-    constructor(modalSelector) {
+    constructor({ handleFormSubmit, modalSelector, loadingText }) {
         super({ modalSelector });
         this._popupForm = this._modalElement.querySelector(".modal__form");
+        this._handleFormSubmit = handleFormSubmit
+        this._loadingText = loadingText
         
     }
 
@@ -13,7 +15,7 @@ export default class PopupWithConfirmation extends Popup {
 
     renderLoading(isLoading, submitSave) {
         if (isLoading) {
-          this._popupForm.querySelector(".modal__save-button").textContent = "Deleting...";
+          this._popupForm.querySelector(".modal__save-button").textContent = this._loadingText;
         } else {
           this._popupForm.querySelector(".modal__save-button").textContent = submitSave;
         }

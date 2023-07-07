@@ -88,7 +88,7 @@ export const cardTemplate = document
  ********************/
 
 const modalWithImage = new PopupWithImage({
-  modalSelector: avatarSelector,
+  modalSelector: avatarModal
 });
 
 const modalWithFormUser = new PopupWithForm({
@@ -166,7 +166,7 @@ const modalFormImage = new PopupWithForm({
 
 const deleteModal = new PopupWithConfirmation({
   handleFormSubmit: () => {
-    deleteModal.renderLoading(true);
+    deleteModal._handleFormSubmit();
   },
   modalSelector: cardModalDelete,
   loadingText: "Deleting...",
@@ -256,17 +256,17 @@ avatarEditButton.addEventListener("click", () => {
       handleDeleteClick: () => {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
-          deleteModal.renderLoading(true);
+          deleteModal.renderLoading(true, "Yes");
           const id = card.getId();
           api
             .deleteCard(id)
             .then(() => {
-              card.deleteCard();
+              card._deleteCard();
               deleteModal.close();
             })
             .catch(console.error)
             .finally(() => {
-              deleteModal.renderLoading(false);
+              deleteModal.renderLoading(false, "Yes");
             });
         });
         
