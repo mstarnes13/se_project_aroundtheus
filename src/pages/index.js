@@ -14,7 +14,7 @@ import {
   validationSettings,
   userNameSelector,
   userDescriptionSelector,
-  avatarModal,
+  imageModalSelector,
   profileModalSelector,
   cardModalSelector,
   cardListSelector,
@@ -27,7 +27,7 @@ import {
   modalChangeProfileAvatarSelector,
   editModalFormSelector,
   addCardFormSelector,
-  avatarModalFormSelector,
+  imageModalSelectorFormSelector,
   cardModalDelete,
 } from "../utils/constants.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -61,9 +61,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       title: userData.name,
       description: userData.about,
+      avatar: userData.avatar
     });
 
-    userData.avatar, (userId = userData._id);
+    
     cardSection = new Section(
       {
         data: cardData,
@@ -86,23 +87,23 @@ export const cardTemplate = document
  ********************/
 
 const modalWithImage = new PopupWithImage({
-  modalSelector: avatarModal,
+  modalSelector: imageModalSelector,
 });
 
-const modalWithFormUser = new PopupWithForm({
+const avatarModal = new PopupWithForm({
   modalSelector: modalChangeProfileAvatarSelector,
   handleFormSubmit: (data) => {
-    modalWithFormUser.renderLoading(true);
+    avatarModal.renderLoading(true);
     api
       .updateUserProfile({ avatar: data.url })
       .then((data) => {
         userInfo.setAvatarInfo(data.avatar);
-        modalWithFormUser.close();
+        avatarModal.close();
       })
       .catch(console.error)
 
       .finally(() => {
-        modalWithFormUser.renderLoading(false);
+        avatarModal.renderLoading(false);
       });
   },
   loadingText: "Saving...",
@@ -121,7 +122,7 @@ const modalFormUser = new PopupWithForm({
           title: data.name,
           description: data.about,
         });
-        // userInfo.setAvatarInfo(data.avatar);
+        
         modalFormUser.close();
       })
       .catch(console.error)
@@ -167,7 +168,7 @@ const deleteModal = new PopupWithConfirmation({
 modalFormImage.setEventListeners();
 modalWithImage.setEventListeners();
 modalFormUser.setEventListeners();
-modalWithFormUser.setEventListeners();
+avatarModal.setEventListeners();
 deleteModal.setEventListeners();
 
 /*********************
@@ -212,7 +213,7 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 avatarEditButton.addEventListener("click", () => {
-  modalWithFormUser.open();
+  avatarModal.open();
   if ("modal-form-avatar" in formValidators) {
     formValidators["modal-form-avatar"].resetValidation();
   }
