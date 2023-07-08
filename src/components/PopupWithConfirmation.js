@@ -6,28 +6,32 @@ export default class PopupWithConfirmation extends Popup {
     this._popupForm = this._modalElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._loadingText = loadingText;
+    this._confirmDeleteButton = this._modalElement.querySelector(
+      "#modal-delete-button"
+    );
+    this._submitButton = this._modalElement.querySelector(".modal__button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
-  setSubmitAction(action) {
-    this._handleFormSubmit = action;
-  }
-
-  renderLoading(isLoading, submitSave) {
+  renderLoading(isLoading) {
     if (isLoading) {
-      this._popupForm.querySelector(".modal__save-button").textContent =
-        this._loadingText;
+      this._confirmDeleteButton.textContent = this._loadingText;
     } else {
-      this._popupForm.querySelector(".modal__save-button").textContent =
-        submitSave;
+      this._confirmDeleteButton.textContent = this._submitButtonText;
     }
+  }
+
+  open() {
+    super.open();
+    this._popupForm.addEventListener("submit", this._handleFormSubmit);
   }
 
   close() {
     super.close();
     this._popupForm.removeEventListener("submit", this._handleFormSubmit);
   }
-  setEventListeners() {
-    super.setEventListeners();
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+
+  setSubmitAction(action) {
+    this._handleFormSubmit = action;
   }
 }

@@ -36,10 +36,9 @@ const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   headers: {
     authorization: "9c860865-e6d3-4014-b437-60037dde85fb",
-    "Content-Type" : "application/json",
+    "Content-Type": "application/json",
   },
 });
-  
 
 /*************
  * USER INFO *
@@ -62,10 +61,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       title: userData.name,
       description: userData.about,
-      avatar: userData.avatar,
     });
-    userInfo.setAvatarInfo(userData.avatar);
-    userId = userData._id;
+
+    userData.avatar, (userId = userData._id);
     cardSection = new Section(
       {
         data: cardData,
@@ -88,7 +86,7 @@ export const cardTemplate = document
  ********************/
 
 const modalWithImage = new PopupWithImage({
-  modalSelector: avatarModal
+  modalSelector: avatarModal,
 });
 
 const modalWithFormUser = new PopupWithForm({
@@ -102,7 +100,7 @@ const modalWithFormUser = new PopupWithForm({
         modalWithFormUser.close();
       })
       .catch(console.error)
-      
+
       .finally(() => {
         modalWithFormUser.renderLoading(false);
       });
@@ -127,12 +125,9 @@ const modalFormUser = new PopupWithForm({
         modalFormUser.close();
       })
       .catch(console.error)
-      
+
       .finally(() => {
         modalFormUser.renderLoading(false);
-        // if ("edit-modal-form" in formValidators) {
-        //   formValidators["edit-modal-form"].resetValidation();
-        // }
       });
   },
   loadingText: "Saving...",
@@ -152,15 +147,12 @@ const modalFormImage = new PopupWithForm({
       })
       .catch((err) => {
         console.error(err);
-  })
+      })
       .finally(() => {
         modalFormImage.renderLoading(false);
-        // if ("add-card-form" in formValidators) {
-        //   formValidators["add-card-form"].resetValidation();
-        // }
       });
   },
-  
+
   loadingText: "Saving...",
 });
 
@@ -177,22 +169,6 @@ modalWithImage.setEventListeners();
 modalFormUser.setEventListeners();
 modalWithFormUser.setEventListeners();
 deleteModal.setEventListeners();
-
-
-
-
-/**************
- * VALIDATION *
- **************/
-// const addFormValidator = new FormValidator(validationSettings, addCardEditForm);
-// addFormValidator.enableValidation();
-
-// const editFormValidator = new FormValidator(
-//   validationSettings,
-//   profileEditForm
-// );
-
-// editFormValidator.enableValidation();
 
 /*********************
  * ENABLE VALIDATION *
@@ -242,21 +218,18 @@ avatarEditButton.addEventListener("click", () => {
   }
 });
 
- function createCard(cardData)  {
-  // const likes = cardData.likes || [];
-  // console.log('cardData: ', cardData)
+function createCard(cardData) {
   const card = new Card(
     {
       cardData,
       myId: userId,
       handleCardClick: () => {
-        // console.log("cardClick data: ", cardData);
         modalWithImage.open(cardData);
       },
       handleDeleteClick: () => {
         deleteModal.open();
         deleteModal.setSubmitAction(() => {
-          deleteModal.renderLoading(true, "Yes");
+          deleteModal.renderLoading(true);
           const id = card.getId();
           api
             .deleteCard(id)
@@ -264,12 +237,13 @@ avatarEditButton.addEventListener("click", () => {
               card.deleteCard();
               deleteModal.close();
             })
-            .catch(console.error)
+            .catch((err) => {
+              console.error(err);
+            })
             .finally(() => {
-              deleteModal.renderLoading(false, "Yes");
+              deleteModal.renderLoading(false);
             });
         });
-        
       },
 
       handleAPILikeClick: () => {
@@ -291,10 +265,8 @@ avatarEditButton.addEventListener("click", () => {
             .catch((err) => console.error(err));
         }
       },
-      
     },
     "#card-template"
   );
   return card.getView();
-};
-
+}

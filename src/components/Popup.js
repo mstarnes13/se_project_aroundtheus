@@ -40,5 +40,4 @@ export default class Popup {
   //     this._submitButton.textContent = this._submitButtonText;
   //   }
   // }
-  
 }
