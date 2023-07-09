@@ -62,16 +62,16 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       title: userData.name,
       description: userData.about,
-      avatar: userData.avatar,
     });
-    (userId = userData._id),
-      (cardSection = new Section(
-        {
-          data: cardData,
-          renderer: renderCard,
-        },
-        cardListSelector
-      ));
+    userInfo.setAvatarInfo(userData.avatar);
+    userId = userData._id;
+    cardSection = new Section(
+      {
+        data: cardData,
+        renderer: renderCard,
+      },
+      cardListSelector
+    );
     cardSection.renderItems();
   })
   .catch((err) => {
@@ -199,7 +199,7 @@ function createCard(cardData) {
         });
       },
 
-      handleAPILikeClick: () => {
+      handleLikeClick: () => {
         const id = card.getId();
         // console.log('card Id: ', id)
         if (card.isLiked()) {
