@@ -1,35 +1,43 @@
 export default class Popup {
-  constructor({ popupSelector }) {
-    this._popupElement = document.querySelector(popupSelector);
+  constructor({ modalSelector }) {
+    this._modalElement = document.querySelector(modalSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
-
-  open() {
-    this._popupElement.classList.add("modal_opened");
-    document.addEventListener("keydown", this._handleEscClose);
-    const closeButton = this._popupElement.querySelector(".modal__close");
-    this._popupElement.addEventListener("mousedown", this._handleClickClose);
-  }
-
-  close() {
-    document.removeEventListener("keydown", this._handleEscClose);
-    this._popupElement.removeEventListener("mousedown", this._handleClickClose);
-    this._popupElement.classList.remove("modal_opened");
-  }
-
   _handleClickClose = (evt) => {
-    const closeButton = this._popupElement.querySelector(".modal__close");
-    if (
-      evt.target.classList.contains("modal_opened") ||
-      evt.target === closeButton
-    ) {
+    if (evt.target.classList.contains("modal_opened")) {
       this.close(evt.target);
     }
   };
+
+  open() {
+    this._modalElement.classList.add("modal_opened");
+    document.addEventListener("keydown", this._handleEscClose);
+    this._modalElement.addEventListener("mousedown", this._handleClickClose);
+  }
+
+  close() {
+    this._modalElement.classList.remove("modal_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
+    this._modalElement.removeEventListener("mousedown", this._handleClickClose);
+  }
 
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
   };
+
+  setEventListeners() {
+    this._modalElement
+      .querySelector(".modal__close")
+      .addEventListener("click", () => this.close());
+  }
+
+  // renderLoading(isLoading) {
+  //   if (isLoading) {
+  //     this._submitButton.textContent = this._loadingText;
+  //   } else {
+  //     this._submitButton.textContent = this._submitButtonText;
+  //   }
+  // }
 }
