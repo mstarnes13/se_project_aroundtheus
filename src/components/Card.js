@@ -51,7 +51,8 @@ export default class Card {
       });
     this._element
       .querySelector(".card__delete-button")
-      .addEventListener("click", () => {
+      .addEventListener("click", (evt) => {
+        evt.preventDefault();
         this._handleDeleteClick();
       });
     this._element

@@ -30,6 +30,7 @@ import {
   addCardFormSelector,
   imageModalSelectorFormSelector,
   cardModalDelete,
+  deleteFormElement,
 } from "../utils/constants.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
@@ -239,9 +240,15 @@ const profileImageValidator = new FormValidator(
   addAvatarImageElement
 );
 
+const deleteFormValidator = new FormValidator(
+  validationSettings,
+  deleteFormElement
+);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 profileImageValidator.enableValidation();
+deleteFormValidator.enableValidation();
 
 /*******************
  * EVENT LISTENERS *
