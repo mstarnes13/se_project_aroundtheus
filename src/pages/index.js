@@ -159,9 +159,6 @@ const modalFormImage = new PopupWithForm({
 });
 
 const deleteModal = new PopupWithConfirmation({
-  handleFormSubmit: () => {
-    deleteModal._handleFormSubmit();
-  },
   modalSelector: cardModalDelete,
   loadingText: "Deleting...",
 });
@@ -240,15 +237,15 @@ const profileImageValidator = new FormValidator(
   addAvatarImageElement
 );
 
-const deleteFormValidator = new FormValidator(
-  validationSettings,
-  deleteFormElement
-);
+// const deleteFormValidator = new FormValidator(
+//   validationSettings,
+//   deleteFormElement
+// );
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 profileImageValidator.enableValidation();
-deleteFormValidator.enableValidation();
+// deleteFormValidator.enableValidation();
 
 /*******************
  * EVENT LISTENERS *

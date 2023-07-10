@@ -13,6 +13,11 @@ export default class PopupWithConfirmation extends Popup {
     this._submitButtonText = this._submitButton.textContent;
   }
 
+  _onSubmit = (evt) => {
+    evt.preventDefault();
+    this._handleFormSubmit();
+  };
+
   renderLoading(isLoading) {
     if (isLoading) {
       this._confirmDeleteButton.textContent = this._loadingText;
@@ -23,12 +28,12 @@ export default class PopupWithConfirmation extends Popup {
 
   open() {
     super.open();
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+    this._popupForm.addEventListener("submit", this._onSubmit);
   }
 
   close() {
     super.close();
-    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+    this._popupForm.removeEventListener("submit", this._onSubmit);
   }
 
   setSubmitAction(action) {
